@@ -150,31 +150,23 @@ function makeOrderNumber() {
   return `JH-${yy}${mm}${dd}-${random}`;
 }
 
-function buildShippingOptions(subtotalCents) {
-  const standard =
-    subtotalCents >= 15000
-      ? {
-          shipping_rate_data: {
-            type: 'fixed_amount',
-            fixed_amount: { amount: 0, currency: 'usd' },
-            display_name: 'Complimentary Standard Shipping',
-            delivery_estimate: {
-              minimum: { unit: 'business_day', value: 2 },
-              maximum: { unit: 'business_day', value: 5 }
-            }
-          }
-        }
-      : {
-          shipping_rate_data: {
-            type: 'fixed_amount',
-            fixed_amount: { amount: 1295, currency: 'usd' },
-            display_name: 'Standard Shipping',
-            delivery_estimate: {
-              minimum: { unit: 'business_day', value: 2 },
-              maximum: { unit: 'business_day', value: 5 }
-            }
-          }
-        };
+function buildShippingOptions(subtotalCents, promoCode = '') {
+  const normalizedPromo = String(promoCode || '').trim().toUpperCase();
+  const freeShippingPromo = normalizedPromo === 'FREESHIP';
+  const qualifiesForAutomaticFreeShipping = subtotalCents >= 15000;
+  const freeStandard = freeShippingPromo || qualifiesForAutomaticFreeShipping;
+
+  const standard = {
+    shipping_rate_data: {
+      type: 'fixed_amount',
+      fixed_amount: { amount: freeStandard ? 0 : 1295, currency: 'usd' },
+      display_name: freeStandard ? 'Complimentary Standard Shipping' : 'Standard Shipping',
+      delivery_estimate: {
+        minimum: { unit: 'business_day', value: 3 },
+        maximum: { unit: 'business_day', value: 5 }
+      }
+    }
+  };
 
   const express = {
     shipping_rate_data: {
@@ -285,6 +277,10 @@ export default async function handler(req, res) {
       0
     );
 
+    const promoCode = clean(
+      body.promoCode || body.promo_code || body.discountCode || body.discount_code
+    ).toUpperCase();
+
     const customerEmail = clean(
       body.customerEmail || body.customer_email || body.email
     );
@@ -316,12 +312,13 @@ export default async function handler(req, res) {
       shipping_address_collection: {
         allowed_countries: allowedCountries.length ? allowedCountries : ['US']
       },
-      shipping_options: buildShippingOptions(subtotalCents),
+      shipping_options: buildShippingOptions(subtotalCents, promoCode),
       allow_promotion_codes: true,
       phone_number_collection: { enabled: true },
       metadata: {
         order_number: orderNumber,
-        source: 'j-hinton.com'
+        source: 'j-hinton.com',
+        shipping_promo: promoCode === 'FREESHIP' ? 'FREESHIP' : ''
       }
     };
 
@@ -356,4 +353,5 @@ export default async function handler(req, res) {
           : 'Unable to create checkout session. Please try again.'
     });
   }
-}
+        }
+      
