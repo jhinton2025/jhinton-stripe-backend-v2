@@ -1,0 +1,21 @@
+J.HINTON VERCEL EMAIL ENVIRONMENT VARIABLES
+
+Add these in Vercel > Project > Settings > Environment Variables:
+
+SMTP_HOST=smtp.hostinger.com
+SMTP_PORT=465
+SMTP_USER=ordersupport@j-hinton.com
+SMTP_PASS=YOUR_MAILBOX_PASSWORD
+SMTP_FROM=J.HINTON <ordersupport@j-hinton.com>
+
+Keep your existing:
+STRIPE_SECRET_KEY
+STRIPE_WEBHOOK_SECRET
+STRIPE_ALLOWED_COUNTRIES
+STRIPE_AUTOMATIC_TAX
+
+Apply the SMTP variables to Production (and Preview if you use Preview), then redeploy.
+
+Important:
+- Do not commit SMTP_PASS to GitHub.
+- Do not send the mailbox password in ChatGPT.
