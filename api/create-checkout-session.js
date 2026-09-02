@@ -305,6 +305,7 @@ export default async function handler(req, res) {
 
     const sessionParams = {
       mode: 'payment',
+      payment_method_types: ['card'],
       line_items: lineItems,
       client_reference_id: orderNumber,
       success_url:
