@@ -1,0 +1,258 @@
+{
+  "bowery-knit-rouge": {
+    "title": "Bowery Knit — Rouge",
+    "price": 65.0,
+    "img": "/assets/images/products/bowery-knit-rouge/bowery-knit-rouge-1.jpg",
+    "url": "/products/bowery-knit-rouge.html",
+    "sku": "JC4K18",
+    "category": "Accessories"
+  },
+  "flatiron-cap-noir": {
+    "title": "Flatiron Cap — Noir",
+    "price": 75.0,
+    "img": "/assets/images/products/flatiron-cap-noir/flatiron-cap-noir-1.jpg",
+    "url": "/products/flatiron-cap-noir.html",
+    "sku": "JA1N26",
+    "category": "Accessories"
+  },
+  "hudson-backpack-ivory": {
+    "title": "Hudson Backpack — Ivory",
+    "price": 150.0,
+    "img": "/assets/images/products/hudson-backpack-ivory/hudson-backpack-ivory-1.jpg",
+    "url": "/products/hudson-backpack-ivory.html",
+    "sku": "JB6C41",
+    "category": "Accessories"
+  },
+  "hudson-backpack-noir-gold": {
+    "title": "Hudson Backpack — Noir Gold",
+    "price": 150.0,
+    "img": "/assets/images/products/hudson-backpack-noir-gold/hudson-backpack-noir-gold-1.jpg",
+    "url": "/products/hudson-backpack-noir-gold.html",
+    "sku": "JB6N43",
+    "category": "Accessories"
+  },
+  "the-bowery-knit-noir": {
+    "title": "The Bowery Knit — Noir",
+    "price": 65.0,
+    "img": "/assets/images/products/bowery-knit-noir/bowery-knit-noir-1.jpg",
+    "url": "/products/the-bowery-knit-noir.html",
+    "sku": "JC4K19",
+    "category": "Accessories"
+  },
+  "the-flatiron-cap-blanc": {
+    "title": "The Flatiron Cap — Blanc",
+    "price": 75.0,
+    "img": "/assets/images/products/the-flatiron-cap-blanc/the-flatiron-cap-blanc-1.jpg",
+    "url": "/products/the-flatiron-cap-blanc.html",
+    "sku": "JA1B25",
+    "category": "Accessories"
+  },
+  "the-fulton-mesh-cap-blanc": {
+    "title": "The Fulton Mesh Cap — Blanc",
+    "price": 75.0,
+    "img": "/assets/images/products/the-fulton-mesh-cap-blanc/the-fulton-mesh-cap-blanc-1.jpg",
+    "url": "/products/the-fulton-mesh-cap-blanc.html",
+    "sku": "JC3M21",
+    "category": "Accessories"
+  },
+  "the-fulton-mesh-cap-rouge": {
+    "title": "The Fulton Mesh Cap — Rouge",
+    "price": 75.0,
+    "img": "/assets/images/products/the-fulton-mesh-cap-rouge/the-fulton-mesh-cap-rouge-1.jpg",
+    "url": "/products/the-fulton-mesh-cap-rouge.html",
+    "sku": "JC3M22",
+    "category": "Accessories"
+  },
+  "the-remsen-rouge": {
+    "title": "The Remsen Rouge Backpack",
+    "price": 150.0,
+    "img": "/assets/images/products/the-remsen-rouge/the-remsen-rouge-1.png",
+    "url": "/products/the-remsen-rouge.html",
+    "sku": "JB6C42",
+    "category": "Accessories"
+  },
+  "the-jaxson-distressed-denim": {
+    "title": "The Jaxson Distressed Denim",
+    "price": 150.0,
+    "img": "/assets/images/products/the-jaxson-distressed-denim/the-jaxson-distressed-denim-1.jpg",
+    "url": "/products/the-jaxson-distressed-denim.html",
+    "sku": "JD8J62",
+    "category": "Denim"
+  },
+  "the-woodsen-moto-denim": {
+    "title": "The Woodsen Moto Denim",
+    "price": 200.0,
+    "img": "/assets/images/products/the-woodsen-moto-denim/the-woodsen-moto-denim-1.jpg",
+    "url": "/products/the-woodsen-moto-denim.html",
+    "sku": "JD8W61",
+    "category": "Denim"
+  },
+  "the-astor-varsity": {
+    "title": "The Astor Varsity – Charcoal",
+    "price": 350.0,
+    "img": "/assets/images/products/the-astor-varsity/the-astor-varsity-1.png",
+    "url": "/products/the-astor-varsity.html",
+    "sku": "JV5A31",
+    "category": "Outerwear"
+  },
+  "the-bridgeview-varsity": {
+    "title": "The Bridgeview Varsity – Black",
+    "price": 350.0,
+    "img": "/assets/images/products/the-bridgeview-varsity/the-bridgeview-varsity-1.jpg",
+    "url": "/products/the-bridgeview-varsity.html",
+    "sku": "JV5B32",
+    "category": "Outerwear"
+  },
+  "the-laurel-varsity": {
+    "title": "The Laurel Varsity – Red",
+    "price": 350.0,
+    "img": "/assets/images/products/the-laurel-varsity/the-laurel-varsity-1.jpg",
+    "url": "/products/the-laurel-varsity.html",
+    "sku": "JV5L33",
+    "category": "Outerwear"
+  },
+  "the-alban-tee": {
+    "title": "The Alban Tee",
+    "price": 65.0,
+    "img": "/assets/images/products/the-alban-tee/the-alban-tee-1.jpg",
+    "url": "/products/the-alban-tee.html",
+    "sku": "JT7A52",
+    "category": "Polos & Tees"
+  },
+  "the-baymont-polo": {
+    "title": "The Baymont Polo",
+    "price": 85.0,
+    "img": "/assets/images/products/the-baymont-polo/the-baymont-polo-1.jpg",
+    "url": "/products/the-baymont-polo.html",
+    "sku": "JP9B71",
+    "category": "Polos & Tees"
+  },
+  "the-baymont-polo-heather-grey": {
+    "title": "The Baymont Polo — Heather Grey",
+    "price": 85.0,
+    "img": "/assets/images/products/the-baymont-polo-heather-grey/the-baymont-polo-heather-grey-1.jpg",
+    "url": "/products/the-baymont-polo-heather-grey.html",
+    "sku": "JP9H72",
+    "category": "Polos & Tees"
+  },
+  "the-forester-shred-tee": {
+    "title": "The Forester Shred Tee",
+    "price": 65.0,
+    "img": "/assets/images/products/the-forester-shred-tee/the-forester-shred-tee-1.jpg",
+    "url": "/products/the-forester-shred-tee.html",
+    "sku": "JT7F54",
+    "category": "Polos & Tees"
+  },
+  "the-jamison-tee": {
+    "title": "The Jamison Fashion Capitals Tee",
+    "price": 65.0,
+    "img": "/assets/images/products/the-jamison-tee/the-jamison-tee-1.jpg",
+    "url": "/products/the-jamison-tee.html",
+    "sku": "JT7J53",
+    "category": "Polos & Tees"
+  },
+  "the-mott-signature-tee": {
+    "title": "The Mott Signature Tee",
+    "price": 65.0,
+    "img": "/assets/images/products/the-mott-signature-tee/the-mott-signature-tee-1.jpg",
+    "url": "/products/the-mott-signature-tee.html",
+    "sku": "JT7B51",
+    "category": "Polos & Tees"
+  },
+  "the-roselle-v-neck-rouge": {
+    "title": "The Roselle V-Neck — Rouge",
+    "price": 65.0,
+    "img": "/assets/images/products/the-roselle-v-neck-rouge/the-roselle-v-neck-rouge-1.jpg",
+    "url": "/products/the-roselle-v-neck-rouge.html",
+    "sku": "JV9R73",
+    "category": "Polos & Tees"
+  },
+  "the-whitman-sweatshirt": {
+    "title": "The Whitman Sweatshirt",
+    "price": 75.0,
+    "img": "/assets/images/products/the-sutton-sweatshirt-blush/the-whitman-sweatshirt-1.png",
+    "url": "/products/the-whitman-sweatshirt.html",
+    "sku": "JTH001",
+    "category": "Polos & Tees"
+  },
+  "the-gramercy-sweatshirt-black-gold": {
+    "title": "The Gramercy Sweatshirt – Black / Gold",
+    "price": 125.0,
+    "img": "/assets/images/products/the-gramercy-sweatshirt-black-gold/the-gramercy-sweatshirt-black-gold-1.png",
+    "url": "/products/the-gramercy-sweatshirt-black-gold.html",
+    "sku": "JG3BG6",
+    "category": "Sweatshirts"
+  },
+  "the-madisen-sweatshirt-black-white": {
+    "title": "The Madisen Sweatshirt – Black / White",
+    "price": 135.0,
+    "img": "/assets/images/products/the-madisen-sweatshirt-black-white/1.png",
+    "url": "/products/the-madisen-sweatshirt-black-white.html",
+    "sku": "JM2BW6",
+    "category": "Sweatshirts"
+  },
+  "the-rockeford-sweatshirt-grey": {
+    "title": "The Rockeford Sweatshirt – Grey",
+    "price": 125.0,
+    "img": "/assets/images/products/the-rockeford-sweatshirt-grey/the-rockeford-sweatshirt-grey-1.jpg",
+    "url": "/products/the-rockeford-sweatshirt-grey.html",
+    "sku": "JR4GY6",
+    "category": "Sweatshirts"
+  },
+  "the-rockeford-sweatshirt-navy": {
+    "title": "The Rockeford Sweatshirt – Navy",
+    "price": 125.0,
+    "img": "/assets/images/products/the-rockeford-sweatshirt-navy/the-rockeford-sweatshirt-navy-1.jpg",
+    "url": "/products/the-rockeford-sweatshirt-navy.html",
+    "sku": "JR4NW6",
+    "category": "Sweatshirts"
+  },
+  "the-sutton-sweatshirt-blush": {
+    "title": "The Sutton Sweatshirt – Blush",
+    "price": 105.0,
+    "img": "/assets/images/products/the-sutton-sweatshirt-blush/the-whitman-sweatshirt-1.png",
+    "url": "/products/the-sutton-sweatshirt-blush.html",
+    "sku": "JS1B26",
+    "category": "Sweatshirts"
+  },
+  "the-sutton-sweatshirt-navy": {
+    "title": "The Sutton Sweatshirt – Navy",
+    "price": 105.0,
+    "img": "/assets/images/products/the-sutton-sweatshirt-navy/the-sutton-sweatshirt-navy-1.jpg",
+    "url": "/products/the-sutton-sweatshirt-navy.html",
+    "sku": "JS1N26",
+    "category": "Sweatshirts"
+  },
+  "the-mercer-boxer-brief": {
+    "title": "The Mercer Boxer Brief",
+    "price": 35.0,
+    "img": "/assets/images/products/the-mercer-boxer-brief/the-mercer-boxer-brief-1.jpg",
+    "url": "/products/the-mercer-boxer-brief.html",
+    "sku": "JB2X14",
+    "category": "Underwear"
+  },
+  "the-empyre-sweatshirt-teal": {
+    "title": "The Empyre Sweatshirt — Teal",
+    "price": 105.0,
+    "img": "/assets/images/products/the-empyre-sweatshirt-teal/1.jpg",
+    "url": "/products/the-empyre-sweatshirt-teal.html",
+    "sku": "JE3T26",
+    "category": "Sweatshirts"
+  },
+  "the-bridgewell-sweatshirt-rouge": {
+    "title": "The Bridgewell Sweatshirt — Rouge",
+    "price": 105.0,
+    "img": "/assets/images/products/the-bridgewell-sweatshirt-rouge/1.jpg",
+    "url": "/products/the-bridgewell-sweatshirt-rouge.html",
+    "sku": "JB3R26",
+    "category": "Sweatshirts"
+  },
+  "the-flatrock-sweatshirt-royal": {
+    "title": "The Flatrock Sweatshirt — Royal",
+    "price": 105.0,
+    "img": "/assets/images/products/the-flatrock-sweatshirt-royal/1.jpg",
+    "url": "/products/the-flatrock-sweatshirt-royal.html",
+    "sku": "JF3R26",
+    "category": "Sweatshirts"
+  }
+}
