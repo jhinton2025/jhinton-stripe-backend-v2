@@ -1,6 +1,6 @@
 {
   "bowery-knit-rouge": {
-    "title": "Bowery Knit — Rouge",
+    "title": "Bowery Knit \u2014 Rouge",
     "price": 65.0,
     "img": "/assets/images/products/bowery-knit-rouge/bowery-knit-rouge-1.jpg",
     "url": "/products/bowery-knit-rouge.html",
@@ -8,7 +8,7 @@
     "category": "Accessories"
   },
   "flatiron-cap-noir": {
-    "title": "Flatiron Cap — Noir",
+    "title": "Flatiron Cap \u2014 Noir",
     "price": 75.0,
     "img": "/assets/images/products/flatiron-cap-noir/flatiron-cap-noir-1.jpg",
     "url": "/products/flatiron-cap-noir.html",
@@ -16,7 +16,7 @@
     "category": "Accessories"
   },
   "hudson-backpack-ivory": {
-    "title": "Hudson Backpack — Ivory",
+    "title": "Hudson Backpack \u2014 Ivory",
     "price": 150.0,
     "img": "/assets/images/products/hudson-backpack-ivory/hudson-backpack-ivory-1.jpg",
     "url": "/products/hudson-backpack-ivory.html",
@@ -24,7 +24,7 @@
     "category": "Accessories"
   },
   "hudson-backpack-noir-gold": {
-    "title": "Hudson Backpack — Noir Gold",
+    "title": "Hudson Backpack \u2014 Noir Gold",
     "price": 150.0,
     "img": "/assets/images/products/hudson-backpack-noir-gold/hudson-backpack-noir-gold-1.jpg",
     "url": "/products/hudson-backpack-noir-gold.html",
@@ -32,7 +32,7 @@
     "category": "Accessories"
   },
   "the-bowery-knit-noir": {
-    "title": "The Bowery Knit — Noir",
+    "title": "The Bowery Knit \u2014 Noir",
     "price": 65.0,
     "img": "/assets/images/products/bowery-knit-noir/bowery-knit-noir-1.jpg",
     "url": "/products/the-bowery-knit-noir.html",
@@ -40,7 +40,7 @@
     "category": "Accessories"
   },
   "the-flatiron-cap-blanc": {
-    "title": "The Flatiron Cap — Blanc",
+    "title": "The Flatiron Cap \u2014 Blanc",
     "price": 75.0,
     "img": "/assets/images/products/the-flatiron-cap-blanc/the-flatiron-cap-blanc-1.jpg",
     "url": "/products/the-flatiron-cap-blanc.html",
@@ -48,7 +48,7 @@
     "category": "Accessories"
   },
   "the-fulton-mesh-cap-blanc": {
-    "title": "The Fulton Mesh Cap — Blanc",
+    "title": "The Fulton Mesh Cap \u2014 Blanc",
     "price": 75.0,
     "img": "/assets/images/products/the-fulton-mesh-cap-blanc/the-fulton-mesh-cap-blanc-1.jpg",
     "url": "/products/the-fulton-mesh-cap-blanc.html",
@@ -56,7 +56,7 @@
     "category": "Accessories"
   },
   "the-fulton-mesh-cap-rouge": {
-    "title": "The Fulton Mesh Cap — Rouge",
+    "title": "The Fulton Mesh Cap \u2014 Rouge",
     "price": 75.0,
     "img": "/assets/images/products/the-fulton-mesh-cap-rouge/the-fulton-mesh-cap-rouge-1.jpg",
     "url": "/products/the-fulton-mesh-cap-rouge.html",
@@ -88,7 +88,7 @@
     "category": "Denim"
   },
   "the-astor-varsity": {
-    "title": "The Astor Varsity – Charcoal",
+    "title": "The Astor Varsity \u2013 Charcoal",
     "price": 350.0,
     "img": "/assets/images/products/the-astor-varsity/the-astor-varsity-1.png",
     "url": "/products/the-astor-varsity.html",
@@ -96,7 +96,7 @@
     "category": "Outerwear"
   },
   "the-bridgeview-varsity": {
-    "title": "The Bridgeview Varsity – Black",
+    "title": "The Bridgeview Varsity \u2013 Black",
     "price": 350.0,
     "img": "/assets/images/products/the-bridgeview-varsity/the-bridgeview-varsity-1.jpg",
     "url": "/products/the-bridgeview-varsity.html",
@@ -104,7 +104,7 @@
     "category": "Outerwear"
   },
   "the-laurel-varsity": {
-    "title": "The Laurel Varsity – Red",
+    "title": "The Laurel Varsity \u2013 Red",
     "price": 350.0,
     "img": "/assets/images/products/the-laurel-varsity/the-laurel-varsity-1.jpg",
     "url": "/products/the-laurel-varsity.html",
@@ -128,7 +128,7 @@
     "category": "Polos & Tees"
   },
   "the-baymont-polo-heather-grey": {
-    "title": "The Baymont Polo — Heather Grey",
+    "title": "The Baymont Polo \u2014 Heather Grey",
     "price": 85.0,
     "img": "/assets/images/products/the-baymont-polo-heather-grey/the-baymont-polo-heather-grey-1.jpg",
     "url": "/products/the-baymont-polo-heather-grey.html",
@@ -160,7 +160,7 @@
     "category": "Polos & Tees"
   },
   "the-roselle-v-neck-rouge": {
-    "title": "The Roselle V-Neck — Rouge",
+    "title": "The Roselle V-Neck \u2014 Rouge",
     "price": 65.0,
     "img": "/assets/images/products/the-roselle-v-neck-rouge/the-roselle-v-neck-rouge-1.jpg",
     "url": "/products/the-roselle-v-neck-rouge.html",
@@ -176,7 +176,7 @@
     "category": "Polos & Tees"
   },
   "the-gramercy-sweatshirt-black-gold": {
-    "title": "The Gramercy Sweatshirt – Black / Gold",
+    "title": "The Gramercy Sweatshirt \u2013 Black / Gold",
     "price": 125.0,
     "img": "/assets/images/products/the-gramercy-sweatshirt-black-gold/the-gramercy-sweatshirt-black-gold-1.png",
     "url": "/products/the-gramercy-sweatshirt-black-gold.html",
@@ -184,7 +184,7 @@
     "category": "Sweatshirts"
   },
   "the-madisen-sweatshirt-black-white": {
-    "title": "The Madisen Sweatshirt – Black / White",
+    "title": "The Madisen Sweatshirt \u2013 Black / White",
     "price": 135.0,
     "img": "/assets/images/products/the-madisen-sweatshirt-black-white/1.png",
     "url": "/products/the-madisen-sweatshirt-black-white.html",
@@ -192,7 +192,7 @@
     "category": "Sweatshirts"
   },
   "the-rockeford-sweatshirt-grey": {
-    "title": "The Rockeford Sweatshirt – Grey",
+    "title": "The Rockeford Sweatshirt \u2013 Grey",
     "price": 125.0,
     "img": "/assets/images/products/the-rockeford-sweatshirt-grey/the-rockeford-sweatshirt-grey-1.jpg",
     "url": "/products/the-rockeford-sweatshirt-grey.html",
@@ -200,7 +200,7 @@
     "category": "Sweatshirts"
   },
   "the-rockeford-sweatshirt-navy": {
-    "title": "The Rockeford Sweatshirt – Navy",
+    "title": "The Rockeford Sweatshirt \u2013 Navy",
     "price": 125.0,
     "img": "/assets/images/products/the-rockeford-sweatshirt-navy/the-rockeford-sweatshirt-navy-1.jpg",
     "url": "/products/the-rockeford-sweatshirt-navy.html",
@@ -208,7 +208,7 @@
     "category": "Sweatshirts"
   },
   "the-sutton-sweatshirt-blush": {
-    "title": "The Sutton Sweatshirt – Blush",
+    "title": "The Sutton Sweatshirt \u2013 Blush",
     "price": 105.0,
     "img": "/assets/images/products/the-sutton-sweatshirt-blush/the-whitman-sweatshirt-1.png",
     "url": "/products/the-sutton-sweatshirt-blush.html",
@@ -216,7 +216,7 @@
     "category": "Sweatshirts"
   },
   "the-sutton-sweatshirt-navy": {
-    "title": "The Sutton Sweatshirt – Navy",
+    "title": "The Sutton Sweatshirt \u2013 Navy",
     "price": 105.0,
     "img": "/assets/images/products/the-sutton-sweatshirt-navy/the-sutton-sweatshirt-navy-1.jpg",
     "url": "/products/the-sutton-sweatshirt-navy.html",
@@ -232,7 +232,7 @@
     "category": "Underwear"
   },
   "the-empyre-sweatshirt-teal": {
-    "title": "The Empyre Sweatshirt — Teal",
+    "title": "The Empyre Sweatshirt \u2014 Teal",
     "price": 105.0,
     "img": "/assets/images/products/the-empyre-sweatshirt-teal/1.jpg",
     "url": "/products/the-empyre-sweatshirt-teal.html",
@@ -240,7 +240,7 @@
     "category": "Sweatshirts"
   },
   "the-bridgewell-sweatshirt-rouge": {
-    "title": "The Bridgewell Sweatshirt — Rouge",
+    "title": "The Bridgewell Sweatshirt \u2014 Rouge",
     "price": 105.0,
     "img": "/assets/images/products/the-bridgewell-sweatshirt-rouge/1.jpg",
     "url": "/products/the-bridgewell-sweatshirt-rouge.html",
@@ -248,11 +248,20 @@
     "category": "Sweatshirts"
   },
   "the-flatrock-sweatshirt-royal": {
-    "title": "The Flatrock Sweatshirt — Royal",
+    "title": "The Flatrock Sweatshirt \u2014 Royal",
     "price": 105.0,
     "img": "/assets/images/products/the-flatrock-sweatshirt-royal/1.jpg",
     "url": "/products/the-flatrock-sweatshirt-royal.html",
     "sku": "JF3R26",
     "category": "Sweatshirts"
+  },
+  "jhinton-checkout-test-item": {
+    "id": "jhinton-checkout-test-item",
+    "slug": "jhinton-checkout-test-item",
+    "sku": "JHTEST300",
+    "name": "J.HINTON Checkout Test Item",
+    "price": 3,
+    "url": "/products/jhinton-checkout-test-item.html",
+    "category": "Test"
   }
 }
