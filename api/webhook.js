@@ -184,6 +184,37 @@ async function sendOrderConfirmation(stripe, session) {
   return { sent: true };
 }
 
+
+async function syncOrderToFulfillment(sessionId) {
+  const secret = process.env.ORDER_SYNC_SECRET;
+  if (!secret) throw new Error('ORDER_SYNC_SECRET is not configured.');
+
+  const response = await fetch('https://j-hinton.com/order-api/sync.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${secret}`
+    },
+    body: JSON.stringify({ session_id: sessionId })
+  });
+
+  const raw = await response.text();
+  let data = null;
+  try { data = JSON.parse(raw); } catch {}
+
+  if (!response.ok || !data?.ok) {
+    throw new Error(data?.error || `Order sync failed with HTTP ${response.status}.`);
+  }
+
+  console.log('J.HINTON fulfillment order synced', {
+    sessionId,
+    orderNumber: data.orderNumber
+  });
+
+  return data;
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).send('Method Not Allowed');
 
@@ -213,11 +244,23 @@ export default async function handler(req, res) {
 
       if (session.payment_status === 'paid') {
         try {
+          await syncOrderToFulfillment(session.id);
+        } catch (syncError) {
+          console.error('J.HINTON fulfillment sync error:', syncError);
+          return res.status(500).json({
+            received: true,
+            orderSynced: false,
+            error: syncError?.message || 'Unable to sync order to fulfillment.'
+          });
+        }
+
+        try {
           await sendOrderConfirmation(stripe, session);
         } catch (emailError) {
           console.error('J.HINTON confirmation email error:', emailError);
           return res.status(500).json({
             received: true,
+            orderSynced: true,
             emailSent: false,
             error: emailError?.message || 'Unable to send order confirmation.'
           });
