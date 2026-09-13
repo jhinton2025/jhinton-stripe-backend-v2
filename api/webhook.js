@@ -1,6 +1,7 @@
 import Stripe from 'stripe';
 import getRawBody from 'raw-body';
 import nodemailer from 'nodemailer';
+import { sendAdminOrderNotification } from '../lib/admin-order-email.js';
 
 export const config = {
   api: { bodyParser: false }
@@ -263,6 +264,19 @@ export default async function handler(req, res) {
             orderSynced: true,
             emailSent: false,
             error: emailError?.message || 'Unable to send order confirmation.'
+          });
+        }
+
+        try {
+          await sendAdminOrderNotification(stripe, session);
+        } catch (adminEmailError) {
+          console.error('J.HINTON admin order email error:', adminEmailError);
+          return res.status(500).json({
+            received: true,
+            orderSynced: true,
+            customerEmailSent: true,
+            adminEmailSent: false,
+            error: adminEmailError?.message || 'Unable to send admin order notification.'
           });
         }
       }
