@@ -279,5 +279,13 @@
     "price": 1,
     "url": "/products/jhinton-checkout-test-item.html",
     "category": "Test"
+  },
+  "the-lexen-signature-tracksuit-noir": {
+    "title": "The Lexen Signature Tracksuit — Noir",
+    "price": 185.0,
+    "img": "/assets/images/products/the-lexen-signature-tracksuit-noir/the-lexen-signature-tracksuit-noir-1.png",
+    "url": "/products/the-lexen-signature-tracksuit-noir.html",
+    "sku": "JLXTSN1",
+    "category": "Tracksuits & Sets"
   }
 }
