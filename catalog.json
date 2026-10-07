@@ -287,5 +287,29 @@
     "url": "/products/the-lexen-signature-tracksuit-noir.html",
     "sku": "JLXTSN1",
     "category": "Tracksuits & Sets"
+  },
+  "the-bridelle-sweatshirt-teal": {
+    "title": "The Bridelle Sweatshirt — Teal",
+    "price": 105.0,
+    "img": "/assets/images/products/the-bridelle-colorblock-sweatshirt-teal/the-bridelle-colorblock-sweatshirt-teal-1.jpg",
+    "url": "/products/the-bridelle-sweatshirt.html?color=Teal",
+    "sku": "JB3T26",
+    "category": "Sweatshirts"
+  },
+  "the-bridelle-sweatshirt-royal": {
+    "title": "The Bridelle Sweatshirt — Royal",
+    "price": 105.0,
+    "img": "/assets/images/products/the-bridelle-colorblock-sweatshirt-royal/the-bridelle-colorblock-sweatshirt-royal-1.jpg",
+    "url": "/products/the-bridelle-sweatshirt.html?color=Royal",
+    "sku": "JB3Y26",
+    "category": "Sweatshirts"
+  },
+  "the-ashford-79-argyle-sweatshirt": {
+    "title": "Ashford 79 Argyle Sweatshirt",
+    "price": 110.0,
+    "img": "/assets/images/products/the-ashford-79-argyle-sweatshirt/the-ashford-79-argyle-sweatshirt-1.jpg",
+    "url": "/products/the-ashford-79-argyle-sweatshirt.html",
+    "sku": "JA79AG",
+    "category": "Sweatshirts"
   }
 }
