@@ -81,7 +81,7 @@
   },
   "the-jaxson-distressed-denim": {
     "title": "The Jaxson Distressed Denim",
-    "price": 150.0,
+    "price": 200.0,
     "img": "/assets/images/products/the-jaxen-distressed-jeans/the-jaxen-distressed-jeans-1.jpg",
     "url": "/products/the-jaxson-distressed-denim.html",
     "sku": "JD8J62",
@@ -121,27 +121,35 @@
   },
   "the-alban-tee": {
     "title": "The Alban Tee",
-    "price": 65.0,
+    "price": 75.0,
     "img": "/assets/images/products/the-albane-signature-cotton-t-shirt/the-albane-signature-cotton-t-shirt-1.jpg",
     "url": "/products/the-alban-tee.html",
     "sku": "JT7A52",
     "category": "Polos & Tees"
   },
-  "the-baymont-polo": {
-    "title": "The Baymont Polo",
+  "the-baymere-pique-polos": {
+    "title": "Baymere Piqué Polo Shirt",
     "price": 85.0,
-    "img": "/assets/images/products/the-baymere-pique-polo-shirt-blanc/the-baymere-pique-polo-shirt-blanc-1.jpg",
-    "url": "/products/the-baymont-polo.html",
+    "img": "/assets/images/products/the-baymere-pique-polo-shirt/baymere-heather-grey-1.jpg",
+    "url": "/products/the-baymere-pique-polos.html",
     "sku": "JP9B71",
-    "category": "Polos & Tees"
-  },
-  "the-baymont-polo-heather-grey": {
-    "title": "The Baymont Polo — Heather Grey",
-    "price": 85.0,
-    "img": "/assets/images/products/the-baymont-polo-heather-grey/the-baymont-polo-heather-grey-1.jpg",
-    "url": "/products/the-baymont-polo-heather-grey.html",
-    "sku": "JP9H72",
-    "category": "Polos & Tees"
+    "category": "Polos & Tees",
+    "colors": [
+      "Heather Grey",
+      "Blanc"
+    ],
+    "variants": [
+      {
+        "color": "Heather Grey",
+        "sku": "JP9H72",
+        "img": "/assets/images/products/the-baymere-pique-polo-shirt/baymere-heather-grey-1.jpg"
+      },
+      {
+        "color": "Blanc",
+        "sku": "JP9B71",
+        "img": "/assets/images/products/the-baymere-pique-polo-shirt/baymere-blanc-1.jpg"
+      }
+    ]
   },
   "the-forester-shred-tee": {
     "title": "The Forester Shred Tee",
@@ -161,7 +169,7 @@
   },
   "the-jamison-tee": {
     "title": "The Jamison Fashion Capitals Tee",
-    "price": 65.0,
+    "price": 75.0,
     "img": "/assets/images/products/the-jamisyn-fashion-capitals-graphic-t-shirt/the-jamisyn-fashion-capitals-graphic-t-shirt-1.jpg",
     "url": "/products/the-jamison-tee.html",
     "sku": "JT7J53",
