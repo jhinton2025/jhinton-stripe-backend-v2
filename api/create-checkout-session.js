@@ -73,7 +73,8 @@ function productKeys(product) {
     product?.code,
     basenameFromUrl(product?.url),
     product?.title,
-    product?.name
+    product?.name,
+    ...(Array.isArray(product?.variants) ? product.variants.map(v => v.sku) : [])
   ]);
 }
 
@@ -85,6 +86,15 @@ function findCatalogProduct(products, requestedItem) {
     const keys = productKeys(product);
     return requested.some((candidate) => keys.includes(candidate));
   }) || null;
+}
+
+function resolveVariant(product, requestedItem) {
+  if (!Array.isArray(product?.variants) || !product.variants.length) return null;
+  const color = normalized(requestedItem?.color || requestedItem?.selectedColor || requestedItem?.variant?.color);
+  const sku = normalized(requestedItem?.sku);
+  // Explicit color is authoritative; SKU can identify a variant for older carts.
+  return (color && product.variants.find(v => normalized(v.color) === color)) ||
+    (sku && product.variants.find(v => normalized(v.sku) === sku)) || null;
 }
 
 function getProductName(product) {
@@ -244,7 +254,13 @@ export default async function handler(req, res) {
       );
 
       const size = clean(requestedItem?.size);
-      const color = clean(requestedItem?.color);
+      const variant = resolveVariant(product, requestedItem);
+      const color = clean(variant?.color || requestedItem?.color || requestedItem?.selectedColor);
+      if (Array.isArray(product?.variants) && product.variants.length && !variant) {
+        return res.status(400).json({
+          error: `Please select a valid color for ${getProductName(product)} before checkout.`
+        });
+      }
 
       const productData = {
         name: getProductName(product)
@@ -253,7 +269,7 @@ export default async function handler(req, res) {
       const description = clean(product?.description);
       if (description) productData.description = description.slice(0, 500);
 
-      const image = getImage(product);
+      const image = getImage(variant || product);
       if (image) productData.images = [image];
 
       productData.metadata = {
@@ -261,6 +277,7 @@ export default async function handler(req, res) {
       };
       if (size) productData.metadata.size = size.slice(0, 500);
       if (color) productData.metadata.color = color.slice(0, 500);
+      if (variant?.sku) productData.metadata.sku = clean(variant.sku).slice(0, 500);
 
       lineItems.push({
         price_data: {
