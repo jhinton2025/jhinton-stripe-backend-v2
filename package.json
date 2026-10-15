@@ -1,12 +1,1 @@
-{
-  "name": "jhinton-stripe-checkout-api",
-  "version": "1.0.0",
-  "private": true,
-  "type": "module",
-  "dependencies": {
-    "stripe": "^18.5.0",
-    "raw-body": "^3.0.0",
-    "nodemailer": "^7.0.6",
-    "google-auth-library": "^9.14.0"
-  }
-}
+{"name":"crestvale-portal","version":"2.0.0","private":true,"scripts":{"start":"node server.js"},"dependencies":{"express":"^4.21.2","pg":"^8.13.1","bcryptjs":"^2.4.3","helmet":"^8.0.0","express-rate-limit":"^7.5.0","cookie-parser":"^1.4.7","pdfkit":"^0.16.0","dotenv":"^16.4.7"},"engines":{"node":">=20"}}
