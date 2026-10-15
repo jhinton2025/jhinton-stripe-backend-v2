@@ -19,3 +19,9 @@ Apply the SMTP variables to Production (and Preview if you use Preview), then re
 Important:
 - Do not commit SMTP_PASS to GitHub.
 - Do not send the mailbox password in ChatGPT.
+
+Order notification recipients:
+ADMIN_ORDER_EMAIL=ordersupport@j-hinton.com (existing recipient; preserve your current value if different)
+ADDITIONAL_ORDER_EMAILS=houseofjhinton@gmail.com
+
+The backend defaults to also notifying houseofjhinton@gmail.com if ADDITIONAL_ORDER_EMAILS is not set. Separate multiple additional addresses with commas. Each paid order sends one admin email addressed to both recipients. Existing customer confirmations are unchanged.
