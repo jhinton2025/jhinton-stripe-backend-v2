@@ -24,11 +24,45 @@ function checkRateLimit(ip) {
   return record.count <= MAX_REQUESTS;
 }
 
+// Older website builds sent these IDs; map them to keys in catalog.json.
+const PRODUCT_ALIASES = {
+  'the-astor-varsity': 'the-astelle-varsity-jacket-charcoal',
+  'the-bridgeview-varsity': 'the-bridgeline-varsity-jacket-black',
+  'the-laurel-varsity': 'the-laurelle-varsity-jacket-rouge',
+  'the-alban-tee': 'the-albane-signature-cotton-t-shirt',
+  'the-baymont-polo': 'the-baymere-pique-polos',
+  'the-forester-shred-tee': 'the-forrester-shred-graphic-t-shirt',
+  'the-jamison-tee': 'the-jamisyn-fashion-capitals-graphic-t-shirt',
+  'the-mott-signature-tee': 'the-motte-signature-t-shirt',
+  'the-gramercy-sweatshirt-black-gold': 'the-gramerce-embroidered-sweatshirt-black-gold',
+  'the-madisen-sweatshirt-black-white': 'the-madisyn-split-graphic-sweatshirt-black-white',
+  'the-rockeford-sweatshirt-grey': 'the-rockeford-sweatshirt-navy',
+  'the-sutton-sweatshirt-blush': 'the-sutton-sweatshirt-navy',
+  'the-jaxson-distressed-denim': 'the-jaxen-distressed-jeans',
+  'the-woodsen-moto-denim': 'the-woodsyn-moto-jeans'
+};
+
+// The website may send the photo of the color the shopper selected.
+// Only same-site product images are accepted.
+const GARMENT_PATH_RE = /^\/assets\/images\/products\/[A-Za-z0-9._\/-]+\.(jpe?g|png|webp)$/i;
+
+const ALLOWED_ORIGINS = new Set(
+  (process.env.CORS_ORIGIN || 'https://j-hinton.com,https://www.j-hinton.com')
+    .split(',').map(s => s.trim()).filter(Boolean)
+);
+
+async function fetchImageBase64(url) {
+  const r = await fetch(url);
+  const type = r.headers.get('content-type') || '';
+  if (!r.ok || !type.startsWith('image/')) return null;
+  return Buffer.from(await r.arrayBuffer()).toString('base64');
+}
+
 function handleCors(req, res) {
-  const allowedOrigin = process.env.CORS_ORIGIN || 'https://j-hinton.com';
   const origin = req.headers.origin;
-  if (origin === allowedOrigin || !origin) {
-    res.setHeader('Access-Control-Allow-Origin', origin || allowedOrigin);
+  if (origin && ALLOWED_ORIGINS.has(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Vary', 'Origin');
   }
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With');
@@ -60,7 +94,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { productId, userImageBase64, userImageMime } = req.body || {};
+    const { productId, userImageBase64, userImageMime, garmentImage } = req.body || {};
 
     if (!productId || !userImageBase64 || !userImageMime) {
       return res.status(400).json({ error: 'Missing productId, userImageBase64, or userImageMime' });
@@ -78,7 +112,7 @@ export default async function handler(req, res) {
     }
 
     // Verify product exists in catalog
-    const product = catalog[productId];
+    const product = catalog[productId] || catalog[PRODUCT_ALIASES[productId]];
     if (!product) {
       return res.status(404).json({ error: 'Product not found in catalog.' });
     }
@@ -88,12 +122,17 @@ export default async function handler(req, res) {
     const productImagePath = product.vtoImage || product.img;
     const productImgUrl = productImagePath.startsWith('http') ? productImagePath : `${cdnBase}${productImagePath}`;
 
-    const prodImgRes = await fetch(productImgUrl);
-    if (!prodImgRes.ok) {
+    // Prefer the photo of the color the shopper selected; fall back to the catalog image.
+    let productB64 = null;
+    if (typeof garmentImage === 'string' && GARMENT_PATH_RE.test(garmentImage) && !garmentImage.includes('..')) {
+      productB64 = await fetchImageBase64(`${cdnBase}${garmentImage}`).catch(() => null);
+    }
+    if (!productB64) {
+      productB64 = await fetchImageBase64(productImgUrl).catch(() => null);
+    }
+    if (!productB64) {
       return res.status(502).json({ error: 'Failed to retrieve garment reference image.', code: 'GARMENT_IMAGE_FETCH_FAILED' });
     }
-    const productBuffer = Buffer.from(await prodImgRes.arrayBuffer());
-    const productB64 = productBuffer.toString('base64');
 
     // Authenticate with Google Vertex AI
     const projectId = process.env.GCP_PROJECT_ID || 'stone-arch-508908-c0';
