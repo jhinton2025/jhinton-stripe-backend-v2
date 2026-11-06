@@ -365,7 +365,7 @@ export default async function handler(req, res) {
         allowed_countries: allowedCountries.length ? allowedCountries : ['US']
       },
       shipping_options: buildShippingOptions(subtotalCents, promoCode),
-      allow_promotion_codes: true,
+      allow_promotion_codes: false, // promo codes are entered on j-hinton.com checkout (FREESHIP is handled above)
       phone_number_collection: { enabled: true },
       metadata: {
         order_number: orderNumber,
