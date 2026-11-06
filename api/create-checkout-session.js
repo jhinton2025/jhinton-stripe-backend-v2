@@ -160,16 +160,31 @@ function makeOrderNumber() {
   return `JH-${yy}${mm}${dd}-${random}`;
 }
 
+const FLAT_SHIPPING_CENTS = 1195;        // $11.95 standard shipping under $150
+const FREE_SHIPPING_MIN_CENTS = 15000;   // complimentary standard shipping at $150+
+const WELCOME_SHIPPING_CODE = 'FREESHIP';
+
+// FREESHIP is the Private Access welcome code: valid on a customer's first order only.
+// Returns true if this email already has a completed J.HINTON checkout.
+async function hasPreviousOrder(stripe, email) {
+  const sessions = await stripe.checkout.sessions.list({
+    customer_details: { email },
+    status: 'complete',
+    limit: 1
+  });
+  return sessions.data.length > 0;
+}
+
 function buildShippingOptions(subtotalCents, promoCode = '') {
   const normalizedPromo = String(promoCode || '').trim().toUpperCase();
-  const freeShippingPromo = normalizedPromo === 'FREESHIP';
-  const qualifiesForAutomaticFreeShipping = subtotalCents >= 15000;
+  const freeShippingPromo = normalizedPromo === WELCOME_SHIPPING_CODE;
+  const qualifiesForAutomaticFreeShipping = subtotalCents >= FREE_SHIPPING_MIN_CENTS;
   const freeStandard = freeShippingPromo || qualifiesForAutomaticFreeShipping;
 
   const standard = {
     shipping_rate_data: {
       type: 'fixed_amount',
-      fixed_amount: { amount: freeStandard ? 0 : 1295, currency: 'usd' },
+      fixed_amount: { amount: freeStandard ? 0 : FLAT_SHIPPING_CENTS, currency: 'usd' },
       display_name: freeStandard ? 'Complimentary Standard Shipping' : 'Standard Shipping',
       delivery_estimate: {
         minimum: { unit: 'business_day', value: 3 },
@@ -306,6 +321,26 @@ export default async function handler(req, res) {
       body.orderNumber || body.order_number || makeOrderNumber()
     );
 
+    if (promoCode === WELCOME_SHIPPING_CODE) {
+      if (!customerEmail) {
+        return res.status(400).json({
+          error: 'Enter your email to use your FREESHIP welcome code.'
+        });
+      }
+      let repeatCustomer = false;
+      try {
+        repeatCustomer = await hasPreviousOrder(stripe, customerEmail.toLowerCase());
+      } catch (lookupError) {
+        // Never block a sale because the lookup failed; log it and honor the code.
+        console.error('FREESHIP first-order lookup failed:', lookupError);
+      }
+      if (repeatCustomer) {
+        return res.status(400).json({
+          error: 'FREESHIP is a welcome code for first orders only. Remove it to continue. Orders over $150 always ship free.'
+        });
+      }
+    }
+
     const countriesEnv =
       process.env.STRIPE_ALLOWED_COUNTRIES ||
       process.env.ALLOWED_SHIPPING_COUNTRIES ||
@@ -335,7 +370,7 @@ export default async function handler(req, res) {
       metadata: {
         order_number: orderNumber,
         source: 'j-hinton.com',
-        shipping_promo: promoCode === 'FREESHIP' ? 'FREESHIP' : ''
+        shipping_promo: promoCode === WELCOME_SHIPPING_CODE ? WELCOME_SHIPPING_CODE : ''
       }
     };
 
