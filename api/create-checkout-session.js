@@ -175,6 +175,30 @@ async function hasPreviousOrder(stripe, email) {
   return sessions.data.length > 0;
 }
 
+// FREESHIP is also limited to Private Access subscribers. The j-hinton.com endpoint
+// checks the jh_subscribers list (active) and jh_orders (no paid orders yet).
+// Returns true / false, or null if the check could not be completed.
+const ELIGIBILITY_URL =
+  process.env.FREESHIP_ELIGIBILITY_URL ||
+  'https://j-hinton.com/order-api/free-ship-eligibility.php';
+
+async function isPrivateAccessEligible(email) {
+  try {
+    const response = await fetch(ELIGIBILITY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ email }),
+      signal: AbortSignal.timeout(5000)
+    });
+    if (!response.ok) return null;
+    const data = await response.json().catch(() => null);
+    return data && typeof data.eligible === 'boolean' ? data.eligible : null;
+  } catch (error) {
+    console.error('FREESHIP subscriber lookup failed:', error);
+    return null;
+  }
+}
+
 function buildShippingOptions(subtotalCents, promoCode = '') {
   const normalizedPromo = String(promoCode || '').trim().toUpperCase();
   const freeShippingPromo = normalizedPromo === WELCOME_SHIPPING_CODE;
@@ -337,6 +361,15 @@ export default async function handler(req, res) {
       if (repeatCustomer) {
         return res.status(400).json({
           error: 'FREESHIP is a welcome code for first orders only. Remove it to continue. Orders over $150 always ship free.'
+        });
+      }
+
+      // Only Private Access subscribers may use FREESHIP. If the lookup itself
+      // fails (site down), the code is honored so a sale is never blocked.
+      const eligible = await isPrivateAccessEligible(customerEmail.toLowerCase());
+      if (eligible === false) {
+        return res.status(400).json({
+          error: 'FREESHIP is the Private Access welcome code. Use the email you joined Private Access with, or remove the code to continue. Orders over $150 always ship free.'
         });
       }
     }
