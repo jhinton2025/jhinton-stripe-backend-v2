@@ -21,7 +21,8 @@ export default async function handler(req, res) {
       amountTotal: session.amount_total,
       currency: session.currency,
       paymentStatus: session.payment_status,
-      status: session.status
+      status: session.status,
+      welcomeCode: session.metadata?.welcome_code || null
     });
   } catch (error) {
     console.error('Session lookup error:', error);

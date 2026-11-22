@@ -199,9 +199,70 @@ async function isPrivateAccessEligible(email) {
   }
 }
 
-function buildShippingOptions(subtotalCents, promoCode = '') {
+// ---- The Private Edit: personal welcome codes (e.g. JAY-7KQ4MX) ----
+// Issued on j-hinton.com at sign-up: 10% off + complimentary standard shipping,
+// first order only, single use, tied to the member's email. j-hinton.com is the
+// source of truth; the code is marked used when the paid order syncs (sync.php).
+const PRIVATE_EDIT_CODE_PATTERN = /^[A-Z]{2,8}-[A-Z0-9]{6}$/;
+const PRIVATE_EDIT_COUPON_PREFIX = 'JH_PRIVATE_EDIT_';
+const WELCOME_CODE_URL =
+  process.env.WELCOME_CODE_URL ||
+  'https://j-hinton.com/order-api/welcome-code.php';
+
+// Returns the site's answer ({ valid, message, percent_off, free_shipping, code })
+// or null when the check could not be completed.
+async function validatePrivateEditCode(code, email) {
+  const secret = process.env.ORDER_SYNC_SECRET;
+  if (!secret) {
+    console.error('Private Edit code check: ORDER_SYNC_SECRET is not configured.');
+    return null;
+  }
+  try {
+    const response = await fetch(WELCOME_CODE_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${secret}`
+      },
+      body: JSON.stringify({ action: 'validate', code, email }),
+      signal: AbortSignal.timeout(6000)
+    });
+    const data = await response.json().catch(() => null);
+    if (!response.ok || !data || data.ok !== true || typeof data.valid !== 'boolean') return null;
+    return data;
+  } catch (error) {
+    console.error('Private Edit code check failed:', error);
+    return null;
+  }
+}
+
+// One reusable Stripe coupon per percentage, created on first use.
+async function getPrivateEditCoupon(stripe, percentOff) {
+  const percent = Math.max(1, Math.min(50, Math.round(Number(percentOff) || 10)));
+  const id = `${PRIVATE_EDIT_COUPON_PREFIX}${percent}`;
+  try {
+    return await stripe.coupons.retrieve(id);
+  } catch (error) {
+    if (error?.code !== 'resource_missing') throw error;
+    try {
+      return await stripe.coupons.create({
+        id,
+        percent_off: percent,
+        duration: 'once',
+        name: `Private Edit Welcome ${percent}%`
+      });
+    } catch (createError) {
+      // Another request may have created it a moment earlier.
+      if (createError?.code === 'resource_already_exists') return stripe.coupons.retrieve(id);
+      throw createError;
+    }
+  }
+}
+
+function buildShippingOptions(subtotalCents, promoCode = '', freeShippingOverride = false) {
   const normalizedPromo = String(promoCode || '').trim().toUpperCase();
-  const freeShippingPromo = normalizedPromo === WELCOME_SHIPPING_CODE;
+  const freeShippingPromo = normalizedPromo === WELCOME_SHIPPING_CODE || freeShippingOverride;
   const qualifiesForAutomaticFreeShipping = subtotalCents >= FREE_SHIPPING_MIN_CENTS;
   const freeStandard = freeShippingPromo || qualifiesForAutomaticFreeShipping;
 
@@ -374,6 +435,52 @@ export default async function handler(req, res) {
       }
     }
 
+    // The Private Edit personal code: 10% off + complimentary shipping on a first order.
+    let privateEdit = null;
+    if (promoCode && promoCode !== WELCOME_SHIPPING_CODE) {
+      if (!PRIVATE_EDIT_CODE_PATTERN.test(promoCode)) {
+        return res.status(400).json({
+          error: 'This promo code is not valid. Check the code and try again, or remove it to continue.'
+        });
+      }
+      if (!customerEmail) {
+        return res.status(400).json({
+          error: 'Enter the email you joined the Private Edit with to use your code.'
+        });
+      }
+
+      const check = await validatePrivateEditCode(promoCode, customerEmail.toLowerCase());
+      if (!check) {
+        return res.status(503).json({
+          error: 'We could not verify your Private Edit code just now. Please try again in a moment.'
+        });
+      }
+      if (!check.valid) {
+        return res.status(400).json({
+          error: `${check.message || 'This Private Edit code cannot be used.'} Remove it to continue.`
+        });
+      }
+
+      // Second first-order check against Stripe's own records.
+      let repeatCustomer = false;
+      try {
+        repeatCustomer = await hasPreviousOrder(stripe, customerEmail.toLowerCase());
+      } catch (lookupError) {
+        console.error('Private Edit first-order lookup failed:', lookupError);
+      }
+      if (repeatCustomer) {
+        return res.status(400).json({
+          error: 'Your Private Edit code is valid on your first order only. Remove it to continue.'
+        });
+      }
+
+      privateEdit = {
+        code: String(check.code || promoCode),
+        percentOff: Number(check.percent_off) || 10,
+        freeShipping: check.free_shipping !== false
+      };
+    }
+
     const countriesEnv =
       process.env.STRIPE_ALLOWED_COUNTRIES ||
       process.env.ALLOWED_SHIPPING_COUNTRIES ||
@@ -397,15 +504,24 @@ export default async function handler(req, res) {
       shipping_address_collection: {
         allowed_countries: allowedCountries.length ? allowedCountries : ['US']
       },
-      shipping_options: buildShippingOptions(subtotalCents, promoCode),
+      shipping_options: buildShippingOptions(subtotalCents, promoCode, Boolean(privateEdit?.freeShipping)),
       allow_promotion_codes: false, // promo codes are entered on j-hinton.com checkout (FREESHIP is handled above)
       phone_number_collection: { enabled: true },
       metadata: {
         order_number: orderNumber,
         source: 'j-hinton.com',
-        shipping_promo: promoCode === WELCOME_SHIPPING_CODE ? WELCOME_SHIPPING_CODE : ''
+        shipping_promo: promoCode === WELCOME_SHIPPING_CODE ? WELCOME_SHIPPING_CODE : '',
+        welcome_code: privateEdit ? privateEdit.code : '',
+        welcome_discount_percent: privateEdit ? String(privateEdit.percentOff) : ''
       }
     };
+
+    if (privateEdit) {
+      const coupon = await getPrivateEditCoupon(stripe, privateEdit.percentOff);
+      sessionParams.discounts = [{ coupon: coupon.id }];
+      // Stripe accepts either discounts or allow_promotion_codes, not both.
+      delete sessionParams.allow_promotion_codes;
+    }
 
     if (customerEmail) {
       sessionParams.customer_email = customerEmail;
